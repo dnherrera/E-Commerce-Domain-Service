@@ -1,0 +1,34 @@
+version: '3.4'
+
+services:
+  customers:
+    image: rdiazconcha/ecommerceapicustomers:latest
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "80/http"
+
+  orders:
+    image: rdiazconcha/ecommerceapiorders:latest
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "80/http"
+    
+  products:
+    image: rdiazconcha/ecommerceapiproducts:latest
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "80/http"
+
+  search:
+    image: rdiazconcha/ecommerceapisearch:latest
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - Services__Products=http://10.0.0.4:19081/lil/products
+      - Services__Customers=http://10.0.0.4:19081/lil/customers
+      - Services__Orders=http://10.0.0.4:19081/lil/orders
+    ports:
+      - "6004:80"
+
