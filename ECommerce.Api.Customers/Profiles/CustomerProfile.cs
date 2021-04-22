@@ -1,10 +1,22 @@
-﻿namespace ECommerce.Api.Customers.Profiles
+﻿using AutoMapper;
+using ECommerce.Api.Customers.Db;
+using ECommerce.Api.Customers.Models;
+
+namespace ECommerce.Api.Customers.Profiles
 {
-    public class CustomerProfile : AutoMapper.Profile
+    /// <summary>
+    /// Customer Profile
+    /// </summary>
+    /// <seealso cref="AutoMapper.Profile"/>
+    public class CustomerProfile : Profile
     {
+        /// <summary>
+        /// Initializes a new instance of <seealso cref="CustomerProfile"/>
+        /// </summary>
         public CustomerProfile()
         {
-            CreateMap<Db.Customer, Models.Customer>();
+            // Mapping Customer Model to Customer DTO
+            CreateMap<CustomerModel, CustomerDto>();
         }
     }
 }
