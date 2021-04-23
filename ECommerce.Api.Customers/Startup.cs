@@ -1,6 +1,7 @@
 using AutoMapper;
 using ECommerce.Api.Customers.Db;
 using ECommerce.Api.Customers.Interfaces;
+using ECommerce.Api.Customers.Profiles;
 using ECommerce.Api.Customers.Providers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -42,7 +43,7 @@ namespace ECommerce.Api.Customers
             });
 
             services.AddScoped<ICustomersProvider, CustomersProvider>();
-            services.AddAutoMapper(typeof(Startup));
+            services.AddAutoMapper(typeof(CustomerProfile).Assembly);
             services.AddControllers();
         }
 

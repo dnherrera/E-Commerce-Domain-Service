@@ -1,6 +1,6 @@
-﻿using ECommerce.Api.Products.Interfaces;
+﻿using System.Threading.Tasks;
+using ECommerce.Api.Products.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
 
 namespace ECommerce.Api.Products.Controllers
 {

@@ -2,11 +2,21 @@
 
 namespace ECommerce.Api.Orders.Db
 {
+    /// <summary>
+    /// Orders DB Context
+    /// </summary>
+    /// <seealso cref="Microsoft.EntityFrameworkCore.DbContext"/>
     public class OrdersDbContext : DbContext
     {
-        public DbSet<Order> Orders { get; set; }
-        public OrdersDbContext(DbContextOptions options) : base(options)
-        {
-        }
+        /// <summary>
+        /// Initializes a new instance of <seealso cref="OrdersDbContext"/>
+        /// </summary>
+        /// <param name="options"></param>
+        public OrdersDbContext(DbContextOptions options) : base(options) { }
+       
+        /// <summary>
+        /// Gets or sets Orders
+        /// </summary>
+        public DbSet<OrderModel> Orders { get; set; }
     }
 }
