@@ -4,26 +4,41 @@ using System.Threading.Tasks;
 
 namespace ECommerce.Api.Orders.Controllers
 {
+    /// <summary>
+    /// Orders Controller
+    /// </summary>
+    /// <seealso cref="Microsoft.AspNetCore.Mvc.ControllerBase"/>
     [ApiController]
     [Route("api/orders")]
     public class OrdersController : ControllerBase
     {
-        private readonly IOrdersProvider ordersProvider;
+        private readonly IOrdersProvider _ordersProvider;
 
+        /// <summary>
+        /// Intializes a new instance of <seealso cref="OrdersController"/>
+        /// </summary>
+        /// <param name="ordersProvider"></param>
         public OrdersController(IOrdersProvider ordersProvider)
         {
-            this.ordersProvider = ordersProvider;
+            _ordersProvider = ordersProvider;
         }
 
+        /// <summary>
+        /// Get Order by Customer Id
+        /// </summary>
+        /// <param name="customerId"></param>
+        /// <returns></returns>
         [HttpGet("{customerId}")]
         public async Task<IActionResult> GetOrdersAsync(int customerId)
         {
-            var result = await ordersProvider.GetOrdersAsync(customerId);
-            if (result.IsSuccess)
+            var result = await _ordersProvider.GetOrdersAsync(customerId);
+
+            if (!result.IsSuccess)
             {
-                return Ok(result.Orders);
+                return NotFound($"Order by Customer Id '{customerId}' not found. ");
             }
-            return NotFound();
+
+            return Ok(result.Orders);
         }
     }
 }
