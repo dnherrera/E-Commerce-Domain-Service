@@ -37,11 +37,8 @@ namespace ECommerce.Api.Customers
         /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<CustomersDbContext>(options =>
-            {
-                options.UseInMemoryDatabase("Customers"); // Seeding Data in Customer Providers.
-            });
-
+            // Seeding Data in Customer Providers.
+            services.AddDbContext<CustomersDbContext>(options => options.UseInMemoryDatabase("Customers"));
             services.AddScoped<ICustomersProvider, CustomersProvider>();
             services.AddAutoMapper(typeof(CustomerProfile).Assembly);
             services.AddControllers();

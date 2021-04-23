@@ -1,10 +1,22 @@
-﻿namespace ECommerce.Api.Products.Profiles
+﻿using AutoMapper;
+using ECommerce.Api.Products.Db;
+using ECommerce.Api.Products.Models;
+
+namespace ECommerce.Api.Products.Profiles
 {
-    public class ProductProfile : AutoMapper.Profile
+    /// <summary>
+    /// Product Profiel
+    /// </summary>
+    /// <seealso cref="AutoMapper.Profile"/>
+    public class ProductProfile : Profile
     {
+        /// <summary>
+        /// Initializes a new instace of <seealso cref="ProductProfile"/>
+        /// </summary>
         public ProductProfile()
         {
-            CreateMap<Db.Product, Models.Product>();
+            //Mapping Product Model to Product DTO
+            CreateMap<ProductModel, ProductDto>();
         }
     }
 }

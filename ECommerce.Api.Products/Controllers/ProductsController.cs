@@ -4,37 +4,58 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ECommerce.Api.Products.Controllers
 {
+    /// <summary>
+    /// Products Controller
+    /// </summary>
     [ApiController]
     [Route("api/products")]
     public class ProductsController : ControllerBase
     {
-        private readonly IProductsProvider productsProvider;
+        private readonly IProductsProvider _productsProvider;
 
+        /// <summary>
+        /// Intializes a new instance of <seealso cref="ProductsController"/>
+        /// </summary>
+        /// <param name="productsProvider"></param>
         public ProductsController(IProductsProvider productsProvider)
         {
-            this.productsProvider = productsProvider;
+            _productsProvider = productsProvider;
         }
 
+        /// <summary>
+        /// Get Product List
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> GetProductsAsync()
         {
-            var all = await productsProvider.GetProductsAsync();
-            if (all.IsSuccess)
+            var all = await _productsProvider.GetProductsAsync();
+            
+            if (!all.IsSuccess)
             {
-                return Ok(all.Products);
+                return NotFound(all.ErrorMessage);
             }
-            return NotFound(all.ErrorMessage);
+
+            return Ok(all.Products);
         }
 
+        /// <summary>
+        /// Get Product By Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         public async Task<IActionResult> GetProductAsync(int id)
         {
-            var result = await productsProvider.GetProductAsync(id);
-            if (result.IsSuccess)
+            var result = await _productsProvider.GetProductByIdAsync(id);
+            
+            if (!result.IsSuccess)
             {
-                return Ok(result.Product);
+                return NotFound(result.ErrorMessage);
+               
             }
-            return NotFound(result.ErrorMessage);
+
+            return Ok(result.Product);
         }
     }
 }

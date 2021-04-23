@@ -48,7 +48,7 @@ namespace ECommerce.Api.Products.Tests
 
             var productsProvider = new ProductsProvider(dbContext, null, mapper);
 
-            var product = await productsProvider.GetProductAsync(1);
+            var product = await productsProvider.GetProductByIdAsync(1);
             Assert.True(product.IsSuccess);
             Assert.NotNull(product.Product);
             Assert.True(product.Product.Id == 1);
@@ -70,7 +70,7 @@ namespace ECommerce.Api.Products.Tests
 
             var productsProvider = new ProductsProvider(dbContext, null, mapper);
 
-            var product = await productsProvider.GetProductAsync(-1);
+            var product = await productsProvider.GetProductByIdAsync(-1);
             Assert.False(product.IsSuccess);
             Assert.Null(product.Product);
             Assert.NotNull(product.ErrorMessage);
@@ -80,7 +80,7 @@ namespace ECommerce.Api.Products.Tests
         {
             for (int i = 1; i <= 10; i++)
             {
-                dbContext.Products.Add(new Product()
+                dbContext.Products.Add(new ProductModel()
                 {
                     Id = i,
                     Name = Guid.NewGuid().ToString(),
