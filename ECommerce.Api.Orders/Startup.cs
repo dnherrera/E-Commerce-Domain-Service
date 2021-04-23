@@ -35,11 +35,7 @@ namespace ECommerce.Api.Orders
         /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<OrdersDbContext>(options =>
-            {
-                options.UseInMemoryDatabase("Orders");
-            });
-
+            services.AddDbContext<OrdersDbContext>(options =>  options.UseInMemoryDatabase("Orders"));
             services.AddScoped<IOrdersProvider, OrdersProvider>();
             services.AddAutoMapper(typeof(OrderProfile).Assembly);
             services.AddControllers();
