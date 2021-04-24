@@ -1,30 +1,44 @@
-﻿using ECommerce.Api.Search.Interfaces;
+﻿using System.Threading.Tasks;
+using ECommerce.Api.Search.Interfaces;
 using ECommerce.Api.Search.Models;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
 
 namespace ECommerce.Api.Search.Controllers
 {
+    /// <summary>
+    /// Search Controller
+    /// </summary>
     [ApiController]
     [Route("api/search")]
     public class SearchController : ControllerBase
     {
-        private readonly ISearchService searchService;
+        private readonly ISearchService _searchService;
 
+        /// <summary>
+        /// Initializes a new instance of <seealso cref="SearchController"/>
+        /// </summary>
+        /// <param name="searchService"></param>
         public SearchController(ISearchService searchService)
         {
-            this.searchService = searchService;
+            _searchService = searchService;
         }
         
-        [HttpPost]
-        public async Task<IActionResult> SearchAsync(SearchTerm term)
+        /// <summary>
+        /// Search Async
+        /// </summary>
+        /// <param name="term"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<IActionResult> SearchAsync([FromQuery] SearchTermDto term)
         {
-            var result = await searchService.SearchAsync(term.CustomerId);
-            if (result.IsSuccess)
+            var result = await _searchService.SearchAsync(term.CustomerId);
+            
+            if (!result.IsSuccess)
             {
-                return Ok(result.SearchResults);
+                return NotFound($"Search for customer Id '{term.CustomerId}' is not found.");
             }
-            return NotFound();
+
+            return Ok(result.SearchResults);
         }
     }
 }
