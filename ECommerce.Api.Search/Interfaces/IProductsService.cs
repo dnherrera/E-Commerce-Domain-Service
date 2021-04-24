@@ -1,11 +1,18 @@
-﻿using ECommerce.Api.Search.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using ECommerce.Api.Search.Models;
 
 namespace ECommerce.Api.Search.Interfaces
 {
+    /// <summary>
+    /// Product Service Interface
+    /// </summary>
     public interface IProductsService
     {
-        Task<(bool IsSuccess, IEnumerable<Product> Products, string ErrorMessage)> GetProductsAsync();
+        /// <summary>
+        /// Get Products
+        /// </summary>
+        /// <returns></returns>
+        Task<(bool IsSuccess, IEnumerable<ProductDto> Products, string ErrorMessage)> GetProductsAsync();
     }
 }

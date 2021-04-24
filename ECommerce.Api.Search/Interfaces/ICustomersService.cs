@@ -2,8 +2,16 @@
 
 namespace ECommerce.Api.Search.Interfaces
 {
+    /// <summary>
+    /// Customer Service Interface
+    /// </summary>
     public interface ICustomersService
     {
-        Task<(bool IsSuccess, dynamic Customer, string ErrorMessage)> GetCustomerAsync(int id);
+        /// <summary>
+        /// Get Customer By Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        Task<(bool IsSuccess, dynamic Customer, string ErrorMessage)> GetCustomerByIdAsync(int id);
     }
 }
